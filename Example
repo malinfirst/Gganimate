@@ -1,0 +1,28 @@
+
+#Load required packages and set the default ggplot2 theme to theme_bw():
+library(ggplot2)
+library(gganimate)
+library(devtools)
+
+theme_set(theme_bw())
+
+#Demo dataset
+
+library(gapminder)
+head(gapminder)
+
+#Static plot
+#aes For aesthetic, 
+#geom_point for scatter plots, alpha is for transparency
+#scale_color_viridis_d, works like a color palette  
+
+p<-ggplot(gapminder,aes(x=gdpPercap,y=lifeExp, size=pop, colour=country))+
+  geom_point(show.legend = FALSE,alpha=1)+
+  scale_color_viridis_d()+
+  scale_size(range = c(2,12))+
+  scale_x_log10()+
+  labs(x = "GDP per capita", y = "Life expectancy")
+p
+
+p+transition_time(year)+
+  labs(title = "Year:{frame_time}")
