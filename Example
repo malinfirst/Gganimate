@@ -17,12 +17,41 @@ head(gapminder)
 #scale_color_viridis_d, works like a color palette  
 
 p<-ggplot(gapminder,aes(x=gdpPercap,y=lifeExp, size=pop, colour=country))+
-  geom_point(show.legend = FALSE,alpha=1)+
+  geom_point(show.legend = FALSE,alpha=0.7)+
   scale_color_viridis_d()+
   scale_size(range = c(2,12))+
   scale_x_log10()+
   labs(x = "GDP per capita", y = "Life expectancy")
 p
+# 
+# Key R function: transition_time(). The transition length between the states will be set to correspond to the actual time difference between them.
+# 
+# Label variables: frame_time. Gives the time that the current frame corresponds to.
 
 p+transition_time(year)+
   labs(title = "Year:{frame_time}")
+
+# Create facets by continent:
+
+p + facet_wrap(~continent) +
+  transition_time(year) +
+  labs(title = "Year: {frame_time}")
+
+#View Follow
+
+p+transition_time(year)+
+  labs(title = "Year:{frame_time}")+
+  view_follow(fixed_y = TRUE)
+
+#Shadow wake
+p+transition_time(year)+
+  labs(title = "Year:{frame_time}")+
+  shadow_wake(wake_length = 0.1,alpha = FALSE)
+
+#shadow mark
+
+p+transition_time(year)+
+  labs(title="Year:{frame_time}")+
+  shadow_mark(alpha=0.3,size=0.5)+
+  facet_wrap(~continent)
+
