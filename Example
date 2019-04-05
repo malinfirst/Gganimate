@@ -55,3 +55,5 @@ p+transition_time(year)+
   shadow_mark(alpha=0.3,size=0.5)+
   facet_wrap(~continent)
 
+
+
